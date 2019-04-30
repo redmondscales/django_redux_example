@@ -19,7 +19,10 @@ https://github.com/joyzoursky/docker-python-chromedriver
 
 `docker-compose up --build`
 
-`docker-compose exec web python manage.py migrate`
+Because we mount our local file system through docker-compose, initially node_modules and webpack-stats.json is removed, so as a one-off run
+`docker-compose exec web npm install`
+
+`docker-compose exec web npm run build`
 
 http://localhost:8000/counter
 
