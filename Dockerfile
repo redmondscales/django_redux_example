@@ -14,7 +14,6 @@ WORKDIR /code
 EXPOSE 8000
 
 ADD package.json package.json
-ADD package-lock.json package-lock.json
 
 RUN npm cache verify && npm install
 
