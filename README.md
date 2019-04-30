@@ -4,7 +4,7 @@ Example project which uses webpack to integrate redux and react components with 
 
 This approach helps to create complex pages with shared state whilst also leveraging Django's templating engine.
 
-##3rd party libraries used:
+## 3rd party libraries used:
 
 
 For easily rendering webpack compiled bundles
@@ -27,6 +27,8 @@ http://localhost:8000/counter
 
 Local django apps are stored in the django_apps folder. This allows webpack to only scan for files ending in .component.jsx in this folder. Any files matching are treated as entry points and compiled into .js files in /static/js/components.
 
+For example:
+
 "django_apps/appname/somefile.component.jsx"
 
 will be compiled and stored in *webpack-stats.json* as 
@@ -38,7 +40,7 @@ in django using the render_bundle tag as follows:
 
 {% render_bundle 'appname.somefile' %}
 
-###Rendering React Components
+### Rendering React Components
 
 In order to use the tags provided by django-react-templatetags project we use addComponentToWindow function as follows
 
@@ -65,7 +67,7 @@ This will add the HeaderComponent to the window.Components object. We can now us
 
 Where react_props are provided in the Django context object
 
-###Redux 
+### Redux 
 
 If we need components to interact via Redux we can use the wrapComponentInRedux function as follows
 
@@ -131,6 +133,32 @@ See django_apps/counter/js/counter.incrementer.component.jsx for an example.
 
 Navigate to localhost:8000/counter for an example of interaction between two components
 
+When using redux, remember to include the create_redux_store bundle and the react_print template tag, as follows:
+
+```
+{% extends 'base.html'%}
+{% load react %}
+{% load render_bundle from webpack_loader %}
+
+{% block content %}
+
+    {% react_render component="window.Components.counter" props=react_props.counter %}
+
+    {% react_render component="window.Components.display" props=react_props.display %}
+
+{% endblock content %}
+{% block javascript %}
+
+    {{block.super}}
+
+    {% render_bundle 'counter.js.counter_display' %}
+    {% render_bundle 'counter.js.counter_incrementer' %}
+    {% render_bundle 'create_redux_store' %}
+    {% react_print %}
+
+{% endblock javascript %}
+```
+
 ## Development
 
 `docker-compose up`
@@ -152,6 +180,7 @@ This project includes an end-to-end selenium test example where we click on one 
 See django_apps/counter/tests.py for an example.
 
 `docker-compose run web npm run build`
+
 `docker-compose run web python manage.py test`
 
 
