@@ -23,7 +23,7 @@ https://github.com/joyzoursky/docker-python-chromedriver
 
 http://localhost:8000/counter
 
-##React Structure
+## React Structure
 
 Local django apps are stored in the django_apps folder. This allows webpack to only scan for files ending in .component.jsx in this folder. Any files matching are treated as entry points and compiled into .js files in /static/js/components.
 
