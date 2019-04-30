@@ -1,0 +1,53 @@
+{% extends 'base.html'%}
+
+
+
+{% load react %}
+{% load render_bundle from webpack_loader %}
+
+{% block content %}
+
+<h1>react_props on context from Django </h1>
+
+{{react_props}}
+
+<h1>React Components</h1>
+<code>
+    addComponentToWindow(
+        wrapComponentInRedux(
+            ReduxCounter,
+            'counter',
+            ReduxCounterState.reducer,
+            ReduxCounterState.actionCreators
+
+        ),
+        'counter'
+    )
+</code>
+<hr>
+<h2>counter/js/counter_incrementer.component.jsx</h2>
+    <div>Using react_props.counter as props with this template tag: </div>
+    <span>{ react_render component="window.Components.counter" props=react_props.counter }</span>
+    <br />
+    {% react_render component="window.Components.counter" props=react_props.counter %}
+    
+    <hr>
+    <h2><h2>counter/js/counter_display.component.jsx</h2></h2>
+    <div>Using react_props.display as props with this template tag: </div>
+    <span>{ react_render component="window.Components.counter" props=react_props.display }</span>
+    <br>
+    {% react_render component="window.Components.display" props=react_props.display %}
+
+{% endblock content %}
+
+
+{% block javascript %}
+
+    {{block.super}}
+
+    {% render_bundle 'counter.js.counter_display' %}
+    {% render_bundle 'counter.js.counter_incrementer' %}
+    {% render_bundle 'create_redux_store' %}
+    {% react_print %}
+
+{% endblock javascript %}

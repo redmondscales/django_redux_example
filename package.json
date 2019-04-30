@@ -1,0 +1,33 @@
+{
+    "name": "django_redux_template",
+    "version": "1.0.0",
+    "description": "",
+    "main": "index.js",
+    "scripts": {
+        "build": "webpack --config webpack.config.js --mode production",
+        "watch": "webpack --config webpack.config.js --watch --mode development"
+    },
+    "author": "",
+    "license": "ISC",
+    "dependencies": {
+        "react": "^16.8.6",
+        "react-dom": "^16.8.6",
+        "react-redux": "^7.0.3",
+        "redux": "^4.0.1",
+        "redux-thunk": "^2.3.0"
+    },
+    "devDependencies": {
+        "@babel/core": "^7.4.4",
+        "@babel/preset-env": "^7.4.4",
+        "@babel/preset-react": "^7.0.0",
+        "babel-loader": "^8.0.5",
+        "babel-plugin-root-import": "^6.1.0",
+        "css-loader": "^2.1.1",
+        "expose-loader": "^0.7.5",
+        "style-loader": "^0.23.1",
+        "webpack": "^4.30.0",
+        "webpack-bundle-tracker": "^0.4.2-beta",
+        "webpack-cleanup-plugin": "^0.5.1",
+        "webpack-cli": "^3.3.1"
+    }
+}

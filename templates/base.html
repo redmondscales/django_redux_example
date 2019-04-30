@@ -1,0 +1,16 @@
+{% load react %}
+
+{% load render_bundle from webpack_loader %}
+
+{% block content %}
+{% endblock content %}
+
+{% block javascript %}
+
+
+    {% render_bundle 'vendor' %}
+        
+    {% render_bundle 'react_globals' %}
+
+{% endblock javascript %}
+
